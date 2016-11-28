@@ -54,8 +54,6 @@ int main()
 void E(){
 	C();
 
-	getoken();
-
 	if(token == ','){
 		C();
 	}
@@ -67,8 +65,6 @@ void E(){
 
 void C(){
 	A();
-
-	getoken();
 
 	if(token == ',' || token == '}' || token == ')' || token == '$');
 	else{
