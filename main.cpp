@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <string.h>
 
 char token; //lookahead token;
 
@@ -11,8 +12,8 @@ void C();
 void A();
 
 
-void throw_error(char bad_token){
-	std::cout << "\nERROR: " << bad_token << " expected.\n";
+void throw_error(std::string message){
+	std::cout << "\nERROR: " << message << " expected.\n";
 	exit(1);
 }
 
@@ -23,10 +24,11 @@ void throw_error(){
 
 void getoken(){
 	std::cin.get(token);
-	//std::cout << token;
+	std::cout << token;
+
 	while(token ==' ' || token=='\r' || token=='\n'){
 		std::cin.get(token); 
-		//std::cout << token;
+		std::cout << token;
 	}
  	if (
 		token>='a' && token <= 'z' ||
@@ -42,8 +44,9 @@ int main()
 {
 	getoken();
 	E();
+
 	if(token != '$'){
-		throw_error('$');
+		throw_error("$");
 		exit(1);
 	}
 	else std::cout <<"\nThe input is syntactically correct!\n";
@@ -54,46 +57,43 @@ int main()
 void E(){
 	C();
 
-	if(token == ','){
+	while(token == ','){
+		getoken();
+
 		C();
 	}
-	else if(token == ')' || token == '}' || token == '$');
+	if(token == ')' || token == '}' || token == '$');
 	else{
-		throw_error();
+		throw_error("), }, or $");
 	}
 }
 
 void C(){
 	A();
 
-	if(token == ',' || token == '}' || token == ')' || token == '$');
-	else{
+	while(token >= 'a' && token <= 'z' || token == '(' || token == '{'){
 		A();
 	}
 }
 
 void A(){
-	getoken();
-
-	if(token>='a' && token <= 'z');
+	if(token >= 'a' && token <= 'z'){
+		getoken();
+	}
 	else if(token == '('){
+		getoken();
+
 		E();
 
 		getoken();
-
-		if(token != ')'){
-			throw_error(')');
-		}
 	}
 	else if(token == '{'){
+		getoken();
+
 		E();
 
 		getoken();
-
-		if(token != '}'){
-			throw_error('}');
-		}
 	}else{
-		throw_error();
+		throw_error("id, (, or {");
 	}
 }
