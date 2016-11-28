@@ -85,12 +85,20 @@ void A(){
 
 		E();
 
+		if(token != ')'){
+			throw_error(")");
+		}
+
 		getoken();
 	}
 	else if(token == '{'){
 		getoken();
 
 		E();
+
+		if(token != '}'){
+			throw_error("}");
+		}
 
 		getoken();
 	}else{
