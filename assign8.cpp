@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <string.h>
+#include <string>
 
 char token; //lookahead token;
 
@@ -18,7 +18,7 @@ void throw_error(std::string message){
 }
 
 void throw_error(){
-	std::cout <<"\nERROR: unrecognizable symbol in input\n";
+	std::cout << "\nERROR: unrecognizable symbol in input\n";
 	exit(1);
 }
 
@@ -30,7 +30,7 @@ void getoken(){
 		std::cin.get(token); 
 		std::cout << token;
 	}
- 	if (
+	if (
 		token>='a' && token <= 'z' ||
 		token=='{'||token=='}'     ||
 		token=='('||token==')'     ||
